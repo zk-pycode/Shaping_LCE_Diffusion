@@ -33,14 +33,27 @@ Internally each script performs the same pipeline:
 Conservative diffusion. The chemical potential 'mu' is evolved by an explicit, solvent-conserving update
 
 ```
-$$\mu^{n+1} = \mu^{n} - \Delta t \, M^{-1} K \mu^{n}$$
+mu = mu - dt * Minv * (K @ mu)
 ```
 
-where 'K' is the symmetric FEM stiffness matrix assembled from the prism shape-function gradients with an anisotropic diffusivity tensor 'D = D_mu * diag(ax, ay, az)', and 'M' is the lumped (diagonal) mass matrix of nodal volumes. Because '1^T K = 0', the total absorbed solvent 'sum_i v_i * phi_i' is conserved, which makes the finite reservoir meaningful.
+where 'K' is the symmetric FEM stiffness matrix assembled from the prism shape-function gradients with an anisotropic diffusivity tensor 'D = D_mu * diag(ax, ay, az)', and 'Minv' is the inverse of the lumped (diagonal) mass matrix of nodal volumes. Because 'K.sum(axis=0) == 0', the total absorbed solvent 'sum(v * phi)' is conserved, which makes the finite reservoir meaningful.
 
-Finite reservoir. A fixed solvent volume 'V_solvent = solvent_mass / solvent_density' is injected only through the top-surface nodes under the droplet footprint. A branchless clamp-and-deplete gate holds those nodes at 'mu = 1' while cumulative injected volume is below budget, then releases them to diffuse freely once the budget is spent (dome rises, then flattens).
+Finite reservoir. A fixed solvent volume is injected only through the top-surface nodes under the droplet footprint.
 
-Anisotropic hyperelasticity. The solvent concentration 'phi = k_phi * mu' sets a swelling stretch 'J_sw = 1 + phi'. The force kernel evaluates a per-axis Arruda–Boyce strain energy: a neo-Hookean base split equally across axes plus directional chain-stiffening controlled by independent chain-segment counts 'N_x, N_y, N_z', together with a volumetric 'lambda * log(J)' term. The first Piola–Kirchhoff stress is integrated over each prism (8-point Gauss quadrature) and scattered to nodal forces.
+```
+V_solvent = solvent_mass / solvent_density
+```
+
+A branchless clamp-and-deplete gate holds those nodes at 'mu = 1' while cumulative injected volume is below budget, then releases them to diffuse freely once the budget is spent (dome rises, then flattens).
+
+Anisotropic hyperelasticity. The solvent concentration 
+
+```
+phi   = k_phi * mu
+J_sw  = 1 + phi
+```
+
+The force kernel evaluates a per-axis Arruda–Boyce strain energy: a neo-Hookean base split equally across axes plus directional chain-stiffening controlled by independent chain-segment counts 'N_x, N_y, N_z', together with a volumetric term 'lam_0 * log(J)'. The first Piola–Kirchhoff stress is integrated over each prism (8-point Gauss quadrature) and scattered to nodal forces.
 
 Dynamics. Nodal forces drive an explicit, over-damped velocity update with global damping and rigid-body drift removal (the sample floats). A reflective floor reverses any node that would cross 'z = 0'.
 
