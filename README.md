@@ -46,7 +46,7 @@ V_solvent = solvent_mass / solvent_density
 
 A branchless clamp-and-deplete gate holds those nodes at 'mu = 1' while cumulative injected volume is below budget, then releases them to diffuse freely once the budget is spent (dome rises, then flattens).
 
-Anisotropic hyperelasticity. The solvent concentration 
+Anisotropic hyperelasticity. The solvent concentration and swelling stretch are
 
 ```
 phi   = k_phi * mu
