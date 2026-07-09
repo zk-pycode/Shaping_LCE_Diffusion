@@ -8,33 +8,33 @@ This project models the solvent driven swelling and out-of-plane shape morphing 
 
 The disc floats freely (no clamped boundary) above a reflective floor at z = 0, so it is free to dome upward as the solvent enters. The chemical potential field is evolved with a symmetric FEM stiffness operator that conserves the total absorbed solvent, so a finite droplet reservoir is physically meaningful: a fixed solvent budget is fed in through the wetted top-surface nodes via a clamp-and-deplete gate, and the dome rises then flattens as the budget is spent. The mechanical response uses a directional chain-stiffening model (different chain-segment counts along x, y, z) to capture the nematic anisotropy of the LCE.
 
-'''
+```
 Project_Structure/
 ├── Swelling_v20.1_CPU.py       Identical physics, vectorized NumPy force kernel (CPU-only fork)
 ├── Swelling_v20.1_GPU.py       Conservative FEM diffusion + CUDA Arruda-Boyce force kernel (CuPy / GPU)
 └── results/                    Output directory (HDF5 + XDMF written here; create if absent)
-'''
+```
 
 Both scripts are single-file and self-contained, and write an HDF5 + XDMF time-series of the deformed geometry, chemical potential, solvent concentration, and displacement magnitude — directly viewable in ParaView and compared against measured disc-height-vs-time data for quantitative validation.
 
 Internally each script performs the same pipeline:
 
-'''
+```
 1. Build a prism mesh of the disc  -> elliptical projection, center-node split (4 prisms/cell)
 2. Filter degenerate/folded elements (signed, mesh-relative Jacobian threshold)
 3. Assemble conservative FEM diffusion operators  -> stiffness K + lumped mass M
 4. Identify the droplet footprint (reservoir source nodes) on the top surface
 5. Time loop:  diffuse mu  ->  reservoir clamp-and-deplete gate  ->  phi  ->  force  ->  velocity/position update  ->  reflective floor
 6. Write HDF5 frames + an XDMF wrapper for ParaView
-'''
+```
 
 ### Physics
 
 Conservative diffusion. The chemical potential 'mu' is evolved by an explicit, solvent-conserving update
 
-'''
+```
 mu <- mu - dt * M^-1 (K @ mu)
-'''
+```
 
 where 'K' is the symmetric FEM stiffness matrix assembled from the prism shape-function gradients with an anisotropic diffusivity tensor 'D = D_mu * diag(ax, ay, az)', and 'M' is the lumped (diagonal) mass matrix of nodal volumes. Because '1^T K = 0', the total absorbed solvent 'sum_i v_i * phi_i' is conserved, which makes the finite reservoir meaningful.
 
@@ -60,19 +60,14 @@ The GPU script additionally requires a CUDA-capable GPU with a working CuPy/CUDA
 
 1. Create the output directory (both scripts write to 'results/'):
 
-'''
-mkdir -p results
-'''
-
 2. Edit parameters near the top of the script — mesh resolution, material moduli, anisotropy, diffusivity, solvent budget, and time step (see below).
 
 3. Run:
-
-'''
+```
 python Swelling_v20.1_GPU.py     # GPU (recommended)
 # or
 python Swelling_v20.1_CPU.py     # CPU-only fork, identical physics
-'''
+```
 
 Progress, mesh statistics, the solvent budget, and total injected volume are printed to stdout.
 
@@ -98,13 +93,13 @@ Progress, mesh statistics, the solvent budget, and total injected volume are pri
 
 ### Output
 
-'''
+```
 results/
 ├── swelling_v20P2.xdmf          Time-series wrapper for ParaView (GPU run)
 ├── swelling_v20P2.h5            HDF5 data store (geometry, mu_chem, phi, |displacement|)
 ├── swelling_v20P2_cpu.xdmf      Time-series wrapper (CPU run)
 └── swelling_v20P2_cpu.h5        HDF5 data store (CPU run)
-'''
+```
 
 Each saved frame stores the deformed nodal geometry, the chemical potential field, the solvent concentration 'phi', and the displacement magnitude, plus per-frame attributes for simulation time and cumulative injected solvent volume (µL). The mesh topology ('Wedge'/prism elements) is written once.
 
@@ -114,8 +109,7 @@ To visualise, open the '.xdmf' file in ParaView (File → Open → select the XD
 
 ### References
 
-'''
-Software:
-Siddiquee, Z., & Jákli, A. (2026). Diffusion-Driven LCE Swelling. Zenodo. https://doi.org/
+```
+TBA
 
-'''
+```
