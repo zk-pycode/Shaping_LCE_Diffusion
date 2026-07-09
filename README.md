@@ -106,10 +106,10 @@ Progress, mesh statistics, the solvent budget, and total injected volume are pri
 
 ```
 results/
-├── swelling_v20P2.xdmf          Time-series wrapper for ParaView (GPU run)
-├── swelling_v20P2.h5            HDF5 data store (geometry, mu_chem, phi, |displacement|)
-├── swelling_v20P2_cpu.xdmf      Time-series wrapper (CPU run)
-└── swelling_v20P2_cpu.h5        HDF5 data store (CPU run)
+├── swelling_v20_gpu.xdmf      Time-series wrapper for ParaView (GPU run)
+├── swelling_v20_gpu.h5        HDF5 data store (geometry, mu_chem, phi, |displacement|)
+├── swelling_v20_cpu.xdmf      Time-series wrapper (CPU run)
+└── swelling_v20_cpu.h5        HDF5 data store (CPU run)
 ```
 
 Each saved frame stores the deformed nodal geometry, the chemical potential field, the solvent concentration 'phi', and the displacement magnitude, plus per-frame attributes for simulation time and cumulative injected solvent volume (µL). The mesh topology ('Wedge'/prism elements) is written once.
