@@ -1,6 +1,6 @@
 ## Diffusion-Driven Swelling and Shape Morphing of Liquid Crystal Elastomer Discs
 <a href="https://doi.org/"><img alt="Static Badge" src="https://img.shields.io/badge/DOI-pending-yellow">
-<a href="https://doi.org/"><img alt="Static Badge" src="https://img.shields.io/badge/DOI-pending-blue">
+<a href="https://doi.org/10.5281/zenodo.21280739"><img alt="Static Badge" src="https://img.shields.io/badge/DOI-pending-blue">
 
 ### Project Description
 
