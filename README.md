@@ -33,7 +33,7 @@ Internally each script performs the same pipeline:
 Conservative diffusion. The chemical potential 'mu' is evolved by an explicit, solvent-conserving update
 
 ```
-mu <- mu - dt * M^-1 (K @ mu)
+$$\mu^{n+1} = \mu^{n} - \Delta t \, M^{-1} K \mu^{n}$$
 ```
 
 where 'K' is the symmetric FEM stiffness matrix assembled from the prism shape-function gradients with an anisotropic diffusivity tensor 'D = D_mu * diag(ax, ay, az)', and 'M' is the lumped (diagonal) mass matrix of nodal volumes. Because '1^T K = 0', the total absorbed solvent 'sum_i v_i * phi_i' is conserved, which makes the finite reservoir meaningful.
