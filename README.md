@@ -53,9 +53,7 @@ phi   = k_phi * mu
 J_sw  = 1 + phi
 ```
 
-The force kernel evaluates a per-axis Arruda–Boyce strain energy: a neo-Hookean base split equally across axes plus directional chain-stiffening controlled by independent chain-segment counts 'N_x, N_y, N_z', together with a volumetric term 'lam_0 * log(J)'. The first Piola–Kirchhoff stress is integrated over each prism (8-point Gauss quadrature) and scattered to nodal forces.
-
-Dynamics. Nodal forces drive an explicit, over-damped velocity update with global damping and rigid-body drift removal (the sample floats). A reflective floor reverses any node that would cross 'z = 0'.
+The force kernel evaluates a per-axis Arruda–Boyce strain energy: a neo-Hookean base split equally across axes plus directional chain-stiffening controlled by independent chain-segment counts 'N_x, N_y, N_z', together with a volumetric term 'lam_0 * log(J)'. The first Piola–Kirchhoff stress is integrated over each prism (8-point Gauss quadrature) and scattered to nodal forces. These nodal forces drive an explicit, over-damped velocity update with global damping and rigid-body drift removal (the sample floats). A reflective floor reverses any node that would cross 'z = 0'.
 
 ### Environment
 
