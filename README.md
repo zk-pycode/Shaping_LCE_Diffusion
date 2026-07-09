@@ -15,7 +15,7 @@ Project_Structure/
 └── results/                    Output directory (HDF5 + XDMF written here; create if absent)
 ```
 
-Both scripts are single-file and self-contained, and write an HDF5 + XDMF time-series of the deformed geometry, chemical potential, solvent concentration, and displacement magnitude — directly viewable in ParaView and compared against measured disc-height-vs-time data for quantitative validation.
+Both scripts are single-file and self-contained, and write an HDF5 + XDMF time-series of the deformed geometry, chemical potential, solvent concentration, and displacement magnitude - directly viewable in ParaView and compared against measured disc-height-vs-time data for quantitative validation.
 
 Internally each script performs the same pipeline:
 
