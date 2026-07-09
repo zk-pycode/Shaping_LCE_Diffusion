@@ -90,15 +90,15 @@ Progress, mesh statistics, the solvent budget, and total injected volume are pri
 | 'lx, ly, lz' | Disc dimensions (m) | '6e-3, 6e-3, 0.1e-3' |
 | 'mu_0' | Shear modulus (Pa) | '1e8' |
 | 'lam_0' | Bulk (Lamé) modulus (Pa) | '1e9' |
-| 'N_x, N_y, N_z' | Arruda–Boyce chain segments per axis (lower = stiffer stiffening) | '35, 5, 5' |
+| 'N_x, N_y, N_z' | Arruda–Boyce chain segments per axis (lower = stiffer stiffening) | '5, 5, 5' |
 | 'softening_factor' | phi-dependent softening of the moduli | '0.0' |
 | 'D_mu' | Base chemical-potential diffusivity (m²/s) | '1e-9' |
-| 'diff_aniso_x/y/z' | Relative diffusivity along each axis | '0.1, 0.1, 1e-3' |
-| 'k_phi' | Chemical potential → solvent volume fraction conversion | '1.114' |
+| 'diff_aniso_x/y/z' | Relative diffusivity along each axis | '1e-0, 1e-0, 1e-3' |
+| 'k_phi' | Chemical potential → solvent volume fraction conversion | '1.0' |
 | 'dt' | Time step (s) | '2.5e-4' |
 | 'nsteps' | Number of steps ('9000 / dt') | '3.6e7' |
 | 'damping' | Global velocity damping per step | '0.990' |
-| 'solvent_mass' | Total solvent budget (kg) | '0.25e-6' |
+| 'solvent_mass' | Total solvent budget (kg) | '0.50e-6' |
 | 'solvent_density' | Solvent density, 5CB (kg/m³) | '1008.0' |
 | 'frame_record' | Steps per saved frame ('1 / dt' → 1 s/frame) | '4000' |
 
