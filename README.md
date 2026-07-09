@@ -10,8 +10,8 @@ The disc floats freely (no clamped boundary) above a reflective floor at z = 0, 
 
 ```
 Project_Structure/
-├── Swelling_v20.1_CPU.py       Identical physics, vectorized NumPy force kernel (CPU-only fork)
-├── Swelling_v20.1_GPU.py       Conservative FEM diffusion + CUDA Arruda-Boyce force kernel (CuPy / GPU)
+├── Swelling_v20.1_CPU.py       Conservative FEM diffusion, vectorized NumPy force kernel (CPU-only fork)
+├── Swelling_v20.1_GPU.py       Identical physics + CUDA Arruda-Boyce force kernel (CuPy / GPU)
 └── results/                    Output directory (HDF5 + XDMF written here; create if absent)
 ```
 
